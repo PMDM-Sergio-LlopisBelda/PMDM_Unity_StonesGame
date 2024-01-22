@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+//using System;
+using MagicPigGames;
 
 public class MainLoop: MonoBehaviour {
 	
@@ -12,6 +14,7 @@ public class MainLoop: MonoBehaviour {
 	public float minX = -30.0f, maxX = 30.0f;
 	public float minZ = -5.0f, maxZ = 20.0f;
 	public int stonesToSpawn = 20;
+	public ProgressBar progress; 
 	
 	//private bool enableStones = true;
 	private Rigidbody rb;
@@ -19,6 +22,8 @@ public class MainLoop: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(ThrowStones());
+		//progress.sizeMax = stonesToSpawn;
+		progress.SetProgress(0);
 	}
 	
 	// Update is called once per frame
@@ -44,6 +49,8 @@ public class MainLoop: MonoBehaviour {
 			rb.AddForce(Vector3.right * Random.Range(minLateralForce, maxLateralForce), ForceMode.Impulse);
 
 			GameManager.stonesThrown++;
+			float progBarNum = (float) GameManager.stonesThrown / stonesToSpawn;
+			progress.SetProgress(progBarNum);
 			//counter++;
 
 			yield return new WaitForSeconds(Random.Range(minTimeBetweenStones, maxTimeBetweenStones));

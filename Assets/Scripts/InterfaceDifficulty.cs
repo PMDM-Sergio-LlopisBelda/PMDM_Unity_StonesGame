@@ -30,4 +30,8 @@ public class InterfaceDifficulty : MonoBehaviour
     public void ClickHard() {
         SceneManager.LoadScene("HardStoneGame");
     }
+
+    public void ClickRules() {
+        SceneManager.LoadScene("Rules");
+    }
 }
